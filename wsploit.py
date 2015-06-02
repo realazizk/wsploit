@@ -1,49 +1,50 @@
 #!/usr/bin/env python2
+# -*- coding: utf-8 -*-
 # The web hacker's toolkit
 # Made to be simple :3
-from colorama import *
+
+
+import sys
+if sys.version_info > (3, 0) :
+  print('[-] You need a python 2.7 installation')
+  exit()
+
+try :
+  from colorama import *
+except ImportError :
+  print('[-] You need to install colorama module')
+
 import subprocess
 import readline
 from core import show_modules
+
 import importlib
-from terminaltables import AsciiTable
+try :
+  from terminaltables import AsciiTable
+except ImportError:
+  print('[-] You need to install terminaltables module')
 tab = [['Exploit Name', 'Comment']]
 # init colorama
 init()
 
 # Logo :3
 logo = """
-                                    /)  +-------------------------------------+
-                                   //   |                                     |
-                 __*_             //    |              Wsploit 2.0            |
-              /-(____)           //     |        CodeName   : Golden Samurai  |
-             ////- -|\          //      |       Aurthor Name : Mohamed Aziz   |
-          ,____o% -,_          //       |              (MatriX Coder)         |
-          /  \\   |||  ;       //        +-------------------------------------+
-        /____\....::./\      //         
-       _/__/#\_ _,,_/--\    //          
-       /___/######## \/""-(\</          
-      _/__/ '#######  ""^(/</           
-    __/ /   ,)))=:=(,    //.            
-   |,--\   /Q...... /.  (/              
-   /       .Q....../..\                 
-          /.Q ..../...\                 
-         /......./.....\                
-         /...../  \.....\               
-         /_.._./   \..._\               
-          (` )      (` )                
-          | /        \ |                
-          '(          )'                
-         /+|          |+\               
-         |,/          \,/               
-
+██╗    ██╗███████╗██████╗ ██╗      ██████╗ ██╗████████╗
+██║    ██║██╔════╝██╔══██╗██║     ██╔═══██╗██║╚══██╔══╝
+██║ █╗ ██║███████╗██████╔╝██║     ██║   ██║██║   ██║   
+██║███╗██║╚════██║██╔═══╝ ██║     ██║   ██║██║   ██║   
+╚███╔███╔╝███████║██║     ███████╗╚██████╔╝██║   ██║   
+ ╚══╝╚══╝ ╚══════╝╚═╝     ╚══════╝ ╚═════╝ ╚═╝   ╚═╝   
+                                                       
 """
 
-print Fore.GREEN+logo+Fore.RESET
-print Fore.MAGENTA+'\t----[ Loaded '+Fore.RESET+str(len(show_modules.showmodules()))+Fore.MAGENTA+' ]----'+Fore.RESET+'\n'
+print(Fore.GREEN+logo+Fore.RESET)
+print(Fore.MAGENTA+'\t----[ Loaded '+Fore.RESET+str(len(show_modules.showmodules()))+Fore.MAGENTA+' ]----'+Fore.RESET+'\n')
+
 def execom(statement) :
   p = subprocess.Popen(statement[1:], shell=True, stderr=subprocess.PIPE)
   return p.stderr.read(1)
+
 pr = Fore.CYAN+'wsploit >>> '+Fore.RESET
 #moduli = ''
 mod = None
@@ -64,9 +65,9 @@ while True :
             module_comment = ''
           tab.append([modulei, module_comment])
         table = AsciiTable(tab)
-        print '\n'+table.table+'\n'
+        print('\n'+table.table+'\n')
       elif statement == 'exit' :
-        print Back.CYAN+'Good bye !'+Back.RESET
+        print(Back.CYAN+'Good bye !'+Back.RESET)
         break
       elif statement[:4] == 'use ' :
         #moduli = statement[4:]
@@ -74,14 +75,14 @@ while True :
           mod = importlib.import_module('modules.'+statement[4:])
           pr = Fore.CYAN+'wsploit['+statement[4:]+']>>> '+Fore.RESET
         except :
-          print Fore.RED+'Module not found'+Fore.RESET
+          print(Fore.RED+'Module not found'+Fore.RESET)
       if mod != None :
         if statement == 'show options' :
           tab2 = [['Option', 'Value']]
           for key, value in mod.ARGS.iteritems() :
             tab2.append([key, value])
           table = AsciiTable(tab2)
-          print '\n'+table.table+'\n'
+          print('\n'+table.table+'\n')
         elif statement == 'unuse' :
           mod = None
           pr = Fore.CYAN+'wsploit >>> '+Fore.RESET
@@ -95,7 +96,7 @@ while True :
           # Bambam lol don't ask me why :3
           mod.bambam()
   except KeyboardInterrupt:
-    print '\n'+Back.CYAN+'Good bye !'+Back.RESET
+    print('\n'+Back.CYAN+'Good bye !'+Back.RESET)
     break
   #except Exception as e:
   #  print Back.RED+str(e)+Back.RESET
