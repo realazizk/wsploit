@@ -31,11 +31,11 @@ init()
 logo = """
 ██╗    ██╗███████╗██████╗ ██╗      ██████╗ ██╗████████╗
 ██║    ██║██╔════╝██╔══██╗██║     ██╔═══██╗██║╚══██╔══╝
-██║ █╗ ██║███████╗██████╔╝██║     ██║   ██║██║   ██║   
-██║███╗██║╚════██║██╔═══╝ ██║     ██║   ██║██║   ██║   
-╚███╔███╔╝███████║██║     ███████╗╚██████╔╝██║   ██║   
- ╚══╝╚══╝ ╚══════╝╚═╝     ╚══════╝ ╚═════╝ ╚═╝   ╚═╝   
-                                                       
+██║ █╗ ██║███████╗██████╔╝██║     ██║   ██║██║   ██║
+██║███╗██║╚════██║██╔═══╝ ██║     ██║   ██║██║   ██║
+╚███╔███╔╝███████║██║     ███████╗╚██████╔╝██║   ██║
+ ╚══╝╚══╝ ╚══════╝╚═╝     ╚══════╝ ╚═════╝ ╚═╝   ╚═╝
+
 """
 
 print(Fore.GREEN+logo+Fore.RESET)
@@ -56,6 +56,7 @@ while True :
         execom(statement)
       elif statement == 'show modules' :
         modules = show_modules.showmodules()
+        tab = [['Exploit Name', 'Comment']]
         for modulei in modules:
           com = importlib.import_module('modules.'+modulei)
           # When comment attribute dont exist assign empty string

@@ -9,8 +9,8 @@ except ImportError :
 requests.packages.urllib3.disable_warnings()
 
 ARGS = {
-  'URL' : '' 
-} 
+  'URL' : ''
+}
 AUTHOR = 'Mohamed Aziz (MatriX Coder)'
 COMMENT = 'Simple robots.txt revealer'
 
